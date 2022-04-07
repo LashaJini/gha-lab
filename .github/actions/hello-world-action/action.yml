@@ -23,7 +23,7 @@ runs:
     - name: IDK
       shell: bash
       run: |
-        ls ${{ github.workspace }}
+        echo ${{ inputs.param2 }} && ls ${{ github.workspace }}
 
 branding:
   icon: 'award'
