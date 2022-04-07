@@ -12,3 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🔎 Ready for review!"
+      - run: echo "${{ github.ref }} ${{ github.repository }}"
