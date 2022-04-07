@@ -1,6 +1,7 @@
 name: Ready For Review
 
 on:
+  workflow_dispatch:
   pull_request:
     branches: 
       - master
