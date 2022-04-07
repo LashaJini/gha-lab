@@ -4,12 +4,11 @@ on:
   pull_request:
     branches: 
       - master
-      - "!dependabot-**"
     types: [opened, reopened, ready_for_review]
 
 jobs:
   ready-for-review:
-    if: github.event.pull_request.draft == false
+    if: github.event.pull_request.draft == false && !(github.actor == 'dependabot[bot]')
     runs-on: ubuntu-latest
     steps:
       - run: echo "🔎 Ready for review!"
