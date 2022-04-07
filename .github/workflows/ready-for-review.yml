@@ -2,9 +2,8 @@ name: Ready For Review
 
 on:
   pull_request:
-    branches-ignore: "dependabot-**"
-    branches:
-      - master
+    branches-ignore: 
+      - "dependabot-**"
     types: [opened, reopened, ready_for_review]
 
 jobs:
