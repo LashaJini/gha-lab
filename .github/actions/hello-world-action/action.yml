@@ -1,0 +1,30 @@
+name: Hello World Action
+
+author: 109149
+
+description: Lists files in the repo
+
+inputs:
+  param1:
+    description: 'Param 1'
+    required: false
+    default: '1'
+    type: string
+  param2:
+    description: 'Param 2'
+    required: true
+    type: string
+
+# outputs:
+
+runs:
+  using: 'composite'
+  steps:
+    - name: IDK
+      shell: bash
+      run: |
+        ls ${{ github.workspace }}
+
+branding:
+  icon: 'award'
+  color: 'green'
