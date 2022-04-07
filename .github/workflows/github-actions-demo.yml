@@ -1,6 +1,11 @@
 name: Github Actions Demo
 
-on: [push]
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request_review:
+    types: [created]
 
 jobs:
   Explore-Github-Actions:
