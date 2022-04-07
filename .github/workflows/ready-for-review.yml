@@ -9,5 +9,6 @@ on:
 jobs:
   ready-for-review:
     if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
     steps:
       - run: echo "🔎 Ready for review!"
