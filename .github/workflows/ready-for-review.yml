@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: 
       - master
-      - "!dependabot-**"
+      # - "!dependabot-**"
     types: [opened, reopened, ready_for_review]
 
 jobs:
