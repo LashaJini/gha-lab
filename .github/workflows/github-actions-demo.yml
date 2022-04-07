@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - '**'
-  issue_comment:
-    types: [created]
 
 jobs:
   Explore-Github-Actions:
