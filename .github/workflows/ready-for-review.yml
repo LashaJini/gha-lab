@@ -1,0 +1,13 @@
+name: Ready For Review
+
+on:
+  pull_request:
+    branches:
+      - master
+    types: [opened, ready_for_review]
+
+jobs:
+  ready-for-review:
+    if: github.event.pull_request.draft == false
+    steps:
+      - run: echo "🔎 Ready for review!"
