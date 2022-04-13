@@ -1,0 +1,14 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "15:50"
+    timezone: "Asia/Tbilisi"
+  pull-request-branch-name:
+    separator: "-"
+  open-pull-requests-limit: 4
+  labels:
+    - no-jira
+  versioning-strategy: increase
