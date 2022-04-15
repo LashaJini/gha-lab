@@ -12,7 +12,7 @@ jobs:
     name: Runs Once
     steps:
       - name: TMP
-        if: github.run_attempt == "1"
+        # if: github.run_attempt == "1"
         run: |
           echo ${{ github.run_id }} &&
           echo ${{ github.run_number }} &&
