@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Runs Once
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
       - name: TMP
         # if: github.run_attempt == "1"
         run: |
