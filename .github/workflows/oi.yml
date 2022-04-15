@@ -14,7 +14,10 @@ jobs:
       - name: TMP
         # if: github.run_attempt == "1"
         run: |
-          echo ${{ github.run_id }} &&
-          echo ${{ github.run_number }} &&
+          # echo ${{ github.run_id }} &&
+          # echo ${{ github.run_number }} &&
           echo ${{ github.run_attempt }} &&
           echo ${{ github.event.action }}
+
+      - name: Use action
+        uses: ./.github/actions/once
