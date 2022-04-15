@@ -17,4 +17,4 @@ jobs:
           echo ${{ github.run_id }} &&
           echo ${{ github.run_number }} &&
           echo ${{ github.run_attempt }} &&
-          echo ${{ github.event.pull_request }}
+          echo ${{ github.event.action }}
