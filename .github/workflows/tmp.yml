@@ -1,0 +1,23 @@
+name: TMP
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+    branches:
+      - master
+
+jobs:
+  runs-once:
+    runs-on: ubuntu-latest
+    name: Runs Once
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: CHECK
+        run: echo ${{ github.event.action }} > ./notified.txt
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: ./notified.txt
