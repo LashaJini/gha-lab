@@ -14,13 +14,21 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
 
-      - name: TMP
-        # if: github.run_attempt == "1"
-        run: |
-          # echo ${{ github.run_id }} &&
-          # echo ${{ github.run_number }} &&
-          echo ${{ github.run_attempt }} &&
-          echo ${{ github.event.action }}
+      # - name: TMP
+      #   # if: github.run_attempt == "1"
+      #   run: |
+      #     # echo ${{ github.run_id }} &&
+      #     # echo ${{ github.run_number }} &&
+      #     echo ${{ github.run_attempt }} &&
+      #     echo ${{ github.event.action }}
+
+      - name: CHECK
+        run: echo ${{ github.event.action }} > ./notified.txt
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: ./notified.txt
 
       - name: Use action
         uses: ./.github/actions/once
