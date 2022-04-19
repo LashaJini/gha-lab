@@ -11,3 +11,7 @@ jobs:
     runs-one: ubuntu-latest
     steps:
       - run: echo "nice"
+
+      - name: Has Label
+        if: ${{ github.event.label.name == 'tmp label' }}
+        run: echo "HAS LABEL"
