@@ -15,3 +15,9 @@ jobs:
       - name: Has Label
         if: contains(github.event.pull_request.labels.*.name, 'tmp label')
         run: echo "HAS LABEL"
+
+      - name: Labeling
+        uses: andymckay/labeler@1.0.4
+        with:
+          add-labels: "tmp label, bug"
+          remove-labels: "in progress"
