@@ -1,0 +1,13 @@
+name: Label n Stuff
+
+on: 
+  pull_request:
+    branches:
+      - master
+    types: [opened, reopened, ready_for_review]
+
+jobs:
+  label-n-stuff:
+    runs-one: ubuntu-latest
+    steps:
+      - run: echo "nice"
