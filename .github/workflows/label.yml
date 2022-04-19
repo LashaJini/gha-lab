@@ -12,6 +12,11 @@ jobs:
     steps:
       - run: echo "nice"
 
+      - name: Is Draft
+        id: check-draft
+        run: |
+          echo "::set-output name=is-draft::${{ github.event.pull_request.draft == true }}"
+
       - name: Has Label
         if: contains(github.event.pull_request.labels.*.name, 'tmp label')
         run: echo "HAS LABEL"
@@ -21,3 +26,5 @@ jobs:
         with:
           add-labels: "tmp label, bug"
           remove-labels: "in progress"
+
+      - run: echo "${{ fromJson(steps.check-draft.outputs.is-draft) }}"
