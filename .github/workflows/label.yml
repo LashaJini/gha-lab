@@ -12,7 +12,7 @@ jobs:
     steps:
       - run: echo "nice"
 
-      - run: echo "${{ github.event.label.name }}"
+      - run: echo "${{ github.event.pull_request.labels }}"
 
       - name: Has Label
         if: ${{ github.event.label.name == 'tmp label' }}
