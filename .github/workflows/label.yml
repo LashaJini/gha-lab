@@ -12,6 +12,8 @@ jobs:
     steps:
       - run: echo "nice"
 
+      - run: echo "${{ github.event.label.name }}"
+
       - name: Has Label
         if: ${{ github.event.label.name == 'tmp label' }}
         run: echo "HAS LABEL"
