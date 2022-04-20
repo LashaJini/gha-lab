@@ -16,8 +16,10 @@ jobs:
         run: |
           echo "::set-output name=result::${{ toJson(github.event.pull_request.draft == true) }}"
 
-      - name: Handle labels for Draft PR
+      - name: WTF
         run: echo ${{ fromJson(steps.is-pr-eligible.outputs.result) == false }}
+
+      - name: Handle labels for Draft PR
         if: ${{ fromJson(steps.is-pr-eligible.outputs.result) == false }}
         uses: andymckay/labeler@1.0.4
         with:
