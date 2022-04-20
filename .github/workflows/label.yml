@@ -14,10 +14,10 @@ jobs:
       - name: Is Draft
         id: is-pr-eligible
         run: |
-          echo "::set-output name=result::${{ github.event.pull_request.draft == true }}"
+          echo "::set-output name=result::${{ toJson(github.event.pull_request.draft == true) }}"
 
       - name: Handle labels for Draft PR
-        if: ${{ fromJson(steps.is-pr-eligible.outputs.result) == false }}
+        if: ${{ fromJson(steps.is-pr-eligible.outputs.result) == "false" }}
         uses: andymckay/labeler@1.0.4
         with:
           add-labels: "wip, do not review"
