@@ -1,7 +1,8 @@
 name: Label n Stuff
 
-on: 
+on:
   pull_request:
+    types: [opened, reopened, ready_for_review, converted_to_draft]
     branches: [master]
 
 jobs:
