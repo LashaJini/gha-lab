@@ -17,16 +17,16 @@ jobs:
           echo "::set-output name=result::${{ toJson(github.event.pull_request.draft == true) }}"
 
       - name: WTF
-        run: echo ${{ fromJson(steps.is-pr-eligible.outputs.result) == false }}
+        run: echo ${{ github.event.pull_request.converted_to_draft }}
 
       - name: Handle labels for Draft PR
-        if: ${{ fromJson(steps.is-pr-eligible.outputs.result) == false }}
+        if: ${{ !fromJson(steps.is-pr-eligible.outputs.result) }}
         uses: andymckay/labeler@1.0.4
         with:
           add-labels: "wip, do not review"
 
       - name: Handle labels for non-Draft PR
-        if: ${{ fromJson(steps.is-pr-eligible.outputs.result) == true }}
+        if: ${{ fromJson(steps.is-pr-eligible.outputs.result) }}
         uses: andymckay/labeler@1.0.4
         with:
           add-labels: "jira issue created"
