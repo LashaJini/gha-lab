@@ -23,14 +23,14 @@ jobs:
         if: ${{ fromJson(steps.is-pr-eligible.outputs.result) }}
         uses: andymckay/labeler@1.0.4
         with:
-          add-labels: "wip"
+          add-labels: "wip, do not review"
 
       - name: Handle labels for non-Draft PR
         if: ${{ !fromJson(steps.is-pr-eligible.outputs.result) }}
         uses: andymckay/labeler@1.0.4
         with:
           add-labels: "jira issue created"
-          remove-labels: "wip"
+          remove-labels: "wip, do not review"
 
       - name: PR has label - JIRA issue created
         id: jira-issue-created
