@@ -9,7 +9,7 @@ jobs:
   label-n-stuff:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "opened? ${{ github.event.action.opened }}"
+      - run: echo "opened? ${{ github.event.action }}"
 
       - name: Is Draft
         id: is-pr-draft
