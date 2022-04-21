@@ -19,7 +19,7 @@ jobs:
       - name: WTF
         run: echo ${{ fromJson(steps.is-pr-draft.outputs.result) == false }}
 
-      - name: PR has label - JIRA issue created
+      - name: Jira issue can be created
         id: jira-issue-can-be-created
         shell: bash
         run: |
@@ -39,6 +39,6 @@ jobs:
           remove-labels: "wip, do not review"
 
       - name: Simulate action
-        if: ${{ fromJson(steps.is-pr-draft.outputs.result) == true && fromJson(steps.jira-issue-can-be-created.outputs.result) == true }}
+        if: ${{ fromJson(steps.is-pr-draft.outputs.result) == false && fromJson(steps.jira-issue-can-be-created.outputs.result) == true }}
         run: |
           echo "yay!"
