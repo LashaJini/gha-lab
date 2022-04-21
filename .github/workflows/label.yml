@@ -12,33 +12,33 @@ jobs:
       - run: echo "nice"
 
       - name: Is Draft
-        id: is-pr-eligible
+        id: is-pr-draft
         run: |
           echo "::set-output name=result::${{ toJson(github.event.pull_request.draft == true) }}"
 
       - name: WTF
-        run: echo ${{ fromJson(steps.is-pr-eligible.outputs.result) == false }}
+        run: echo ${{ fromJson(steps.is-pr-draft.outputs.result) == false }}
 
       - name: PR has label - JIRA issue created
         id: jira-issue-can-be-created
         shell: bash
         run: |
-          echo "::set-output name=result::${{ fromJson(steps.is-pr-eligible.outputs.result) == true && !contains(github.event.pull_request.labels.*.name, 'jira issue created') }}"
+          echo "::set-output name=result::${{ fromJson(steps.is-pr-draft.outputs.result) == false && !contains(github.event.pull_request.labels.*.name, 'jira issue created') }}"
 
       - name: Handle labels for Draft PR
-        if: ${{ fromJson(steps.is-pr-eligible.outputs.result) }}
+        if: ${{ fromJson(steps.is-pr-draft.outputs.result) }}
         uses: andymckay/labeler@1.0.4
         with:
           add-labels: "wip, do not review"
 
       - name: Handle labels for non-Draft PR
-        if: ${{ !fromJson(steps.is-pr-eligible.outputs.result) }}
+        if: ${{ !fromJson(steps.is-pr-draft.outputs.result) }}
         uses: andymckay/labeler@1.0.4
         with:
           add-labels: "jira issue created"
           remove-labels: "wip, do not review"
 
       - name: Simulate action
-        if: ${{ fromJson(steps.is-pr-eligible.outputs.result) == true && fromJson(steps.jira-issue-can-be-created.outputs.result) == true }}
+        if: ${{ fromJson(steps.is-pr-draft.outputs.result) == true && fromJson(steps.jira-issue-can-be-created.outputs.result) == true }}
         run: |
           echo "yay!"
