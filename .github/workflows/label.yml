@@ -19,6 +19,13 @@ jobs:
       - name: WTF
         run: echo ${{ fromJson(steps.is-pr-eligible.outputs.result) == false }}
 
+      - name: PR has label - JIRA issue created
+        if: ${{ fromJson(steps.is-pr-eligible.outputs.result) == true && !contains(github.event.pull_request.labels.*.name, 'jira issue created') }}
+        id: jira-issue-can-be-created
+        shell: bash
+        run: |
+          echo "::set-output name=result::true"
+
       - name: Handle labels for Draft PR
         if: ${{ fromJson(steps.is-pr-eligible.outputs.result) }}
         uses: andymckay/labeler@1.0.4
@@ -31,13 +38,6 @@ jobs:
         with:
           add-labels: "jira issue created"
           remove-labels: "wip, do not review"
-
-      - name: PR has label - JIRA issue created
-        if: ${{ fromJson(steps.is-pr-eligible.outputs.result) == true && !contains(github.event.pull_request.labels.*.name, 'jira issue created') }}
-        id: jira-issue-can-be-created
-        shell: bash
-        run: |
-          echo "::set-output name=result::true"
 
       - name: Simulate action
         if: ${{ fromJson(steps.is-pr-eligible.outputs.result) == true && fromJson(steps.jira-issue-can-be-created.outputs.result) == true }}
