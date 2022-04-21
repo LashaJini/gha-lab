@@ -33,13 +33,13 @@ jobs:
           remove-labels: "wip, do not review"
 
       - name: PR has label - JIRA issue created
-        id: jira-issue-created
-        if: contains(github.event.pull_request.labels.*.name, 'jira issue created')
+        if: !contains(github.event.pull_request.labels.*.name, 'jira issue created')
+        id: jira-issue-can-be-created
         shell: bash
         run: |
           echo "::set-output name=result::true"
 
       - name: Simulate action
-        if: ${{ fromJson(steps.is-pr-eligible.outputs.result) == true && fromJson(steps.jira-issue-created.outputs.result == true) }}
+        if: ${{ fromJson(steps.is-pr-eligible.outputs.result) == true && fromJson(steps.jira-issue-can-be-created.outputs.result == true) }}
         run: |
           echo "yay!"
