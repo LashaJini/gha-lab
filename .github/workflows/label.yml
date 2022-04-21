@@ -40,6 +40,6 @@ jobs:
           echo "::set-output name=result::true"
 
       - name: Simulate action
-        if: ${{ fromJson(steps.is-pr-eligible.outputs.result) == true && fromJson(steps.jira-issue-can-be-created.outputs.result == true) }}
+        if: ${{ fromJson(steps.is-pr-eligible.outputs.result) == true && fromJson(steps.jira-issue-can-be-created.outputs.result) == true }}
         run: |
           echo "yay!"
