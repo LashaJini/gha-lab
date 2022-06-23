@@ -42,3 +42,12 @@ jobs:
         if: ${{ fromJson(steps.is-pr-draft.outputs.result) == false && fromJson(steps.jira-issue-can-be-created.outputs.result) == true }}
         run: |
           echo "yay!"
+
+      - name: Notify JIRA
+        shell: bash
+        env:
+          TITLE: ${{ fromJson(steps.is-pr-draft.outputs.result) }} | tr -d "'"
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"data": {"author":"${{fromJson(steps.get-pr.outputs.data).user.login}}", "author_url":"${{fromJson(steps.get-pr.outputs.data).user.html_url}}", "title":"$TITLE", "number":"${{fromJson(steps.get-pr.outputs.data).number}}", "url":"${{fromJson(steps.get-pr.outputs.data).html_url}}", "repo":"$REPO"}}' \
+          $JIRA_HOOK
