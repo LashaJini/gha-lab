@@ -45,7 +45,13 @@ jobs:
 
       - name: Notify JIRA
         shell: bash
+        id: title
+        run: |
+          echo "::set-output name=result::'${{ fromJson(steps.is-pr-draft.outputs.result) }}'" | tr -d "'"
+
+      - name: Notify JIRA
+        shell: bash
         run: |
           curl -X POST -H 'Content-type: application/json' \
           "https://google.com" \
-          --data '{"title":"${{ fromJson(steps.is-pr-draft.outputs.result) }} | tr -d "'""}'
+          --data '{"title":"${{ fromJson(steps.title.outputs.result }}"}'
