@@ -47,7 +47,7 @@ jobs:
         shell: bash
         id: title
         run: |
-          echo "::set-output name=result::${{ fromJson(steps.is-pr-draft.outputs.result) }}"
+          echo "::set-output name=result::'${{ fromJson(steps.is-pr-draft.outputs.result) }}'"
 
       - name: Notify JIRA
         shell: bash
