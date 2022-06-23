@@ -46,7 +46,7 @@ jobs:
       - name: Notify JIRA
         shell: bash
         env:
-          TITLE: "wtf"
+          TITLE: "'wtf'"
         run: |
           curl -X POST -H 'Content-type: application/json' \
           "https://google.com" \
