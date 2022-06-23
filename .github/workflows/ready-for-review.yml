@@ -14,13 +14,3 @@ jobs:
     steps:
       - run: echo "🔎 Ready for review!"
       - run: echo "${{ github.ref }} ${{ github.repository }}"
-
-
-    - name: Notify JIRA
-      shell: bash
-      env:
-        TITLE: ${{ fromJson({data: "something"}) }} | tr -d "'"
-      run: |
-        curl -X POST -H 'Content-type: application/json' \
-        --data '{"data": {"author":"${{fromJson(steps.get-pr.outputs.data).user.login}}", "author_url":"${{fromJson(steps.get-pr.outputs.data).user.html_url}}", "title":"$TITLE", "number":"${{fromJson(steps.get-pr.outputs.data).number}}", "url":"${{fromJson(steps.get-pr.outputs.data).html_url}}", "repo":"$REPO"}}' \
-        $JIRA_HOOK
