@@ -46,7 +46,7 @@ jobs:
       - name: Notify JIRA
         shell: bash
         env:
-          TITLE: ${{ fromJson(steps.is-pr-draft.outputs.result) }}
+          TITLE: ${{ fromJson(steps.is-pr-draft.outputs.result) }} | tr -d "'"
         run: |
           curl -X POST -H 'Content-type: application/json' \
           "https://google.com" \
