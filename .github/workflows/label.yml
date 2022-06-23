@@ -49,4 +49,5 @@ jobs:
           TITLE: ${{ fromJson(steps.is-pr-draft.outputs.result) }}
         run: |
           curl -X POST -H 'Content-type: application/json' \
+          "https://google.com" \
           --data '{"title":"$TITLE"}'
